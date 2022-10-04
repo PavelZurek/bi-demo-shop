@@ -1,8 +1,10 @@
 import {NextPage} from 'next';
-import {Text} from '@chakra-ui/react';
+import {FeaturedProduct} from '../src/components/product/FeaturedProduct';
 
 const IndexPage: NextPage = () => {
-    return <Text>Hello world!</Text>
+    return <>
+        <FeaturedProduct />
+    </>
 }
 
 export default IndexPage

@@ -1,0 +1,17 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "jsx-quotes": "error",
+    "no-trailing-spaces": "error",
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "indent": "error",
+    "no-unused-vars": "error"
+  }
+}

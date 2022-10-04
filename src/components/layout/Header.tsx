@@ -6,12 +6,14 @@ export const Header: FC = () => {
         <HStack
             justifyContent="space-between"
             borderBottom="4px solid #E4E4E4"
-            paddingY="24px"
+            paddingY="36px"
+            paddingX={{ base: '32px', lg: 0 }}
+            marginX={{ base: 0, lg: '80px' }}
         >
             <Link href="/">
-                <Image src="/images/logo.svg" alt="BEJAMAS homepage" height="25px" />
+                <Image src="/images/logo.svg" alt="BEJAMAS homepage" height={{ base: '20px', lg: '26px' }} />
             </Link>
-            <Image src="/images/shopping-cart.svg" alt="Shopping cart" height="54px" />
+            <Image src="/images/shopping-cart.svg" alt="Shopping cart" height={{ base: '32px', lg: '54px'}} />
         </HStack>
     )
 }

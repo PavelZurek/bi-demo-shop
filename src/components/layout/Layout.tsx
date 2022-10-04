@@ -5,7 +5,9 @@ export default function Layout({ children }) {
     return (
         <Container variant="pageWrapper">
             <Header />
-            {children}
+            <Container variant="contentWrapper">
+                {children}
+            </Container>
         </Container>
     )
 }

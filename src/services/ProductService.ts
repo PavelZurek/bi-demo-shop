@@ -21,8 +21,9 @@ export class ProductService {
                 imageAlt
                 imageUrl
                 price
+                featured
                 recommendations {
-                  product {
+                  productByRecommendedProductId {
                     id
                     imageAlt
                     imageUrl

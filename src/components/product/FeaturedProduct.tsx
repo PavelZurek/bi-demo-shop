@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {Box, Button, Heading, HStack, Stack, Text, useBreakpointValue} from '@chakra-ui/react';
 import Image from 'next/image';
 import {Product} from '../../models/Product';
+import {formatCategoryName, formatDimensions, formatFileSize} from '../../helpers/format';
 
 const Recommendation: FC<{ imageUrl: string }> = ({ imageUrl }) => {
     return <Box position="relative" width="120px" height="150px">
@@ -67,7 +68,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
                 maxWidth={{ base: '100%', lg: '60%' }}
             >
                 <Heading variant="featuredProductSubtitle">About the {product.name}</Heading>
-                <Heading variant="featuredProductSubtitle" color="muted">{product.category}</Heading>
+                <Heading variant="featuredProductSubtitle" color="muted">{formatCategoryName(product.category)}</Heading>
                 {product.details?.description && (
                     <Text color="muted">
                         {product.details.description}
@@ -79,14 +80,18 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
                     <Heading variant="featuredProductSubtitle">People also buy</Heading>
                     <HStack spacing="30px" justifyContent={{ base: 'start', lg: 'end' }}>
                         {product.recommendations.map(rp => (
-                            <Recommendation key={`recommentarion-${product.id}-${rp.product.id}`} imageUrl={rp.product.imageUrl} />
+                            <Recommendation key={`recommentarion-${product.id}-${rp.productByRecommendedProductId.id}`} imageUrl={rp.productByRecommendedProductId.imageUrl} />
                         ))}
                     </HStack>
                 </Stack>
                 <Stack>
                     <Heading variant="featuredProductSubtitle">Details</Heading>
-                    <Text variant="small" color="muted">Size: 1020 x 1020 pixels</Text>
-                    <Text variant="small" color="muted">Size: 15 mb</Text>
+                    {product.details?.dimensions && (
+                        <Text variant="small" color="muted">Size: {formatDimensions(product.details.dimensions)} pixels</Text>
+                    )}
+                    {product.details?.size && (
+                        <Text variant="small" color="muted">Size: {formatFileSize(product.details.size)}</Text>
+                    )}
                 </Stack>
             </Stack>
         </Stack>

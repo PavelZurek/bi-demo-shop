@@ -1,6 +1,7 @@
 type ProductRecommendation = {
     __typename: 'recommendation';
     product: Product;
+    productByRecommendedProductId: Product;
 }
 
 type ProductDetails = {

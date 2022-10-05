@@ -1,32 +1,22 @@
-import {FC, useEffect, useState} from 'react';
-import {Product} from '../../models/Product';
-import {ProductService} from '../../services/ProductService';
+import {FC, useState} from 'react';
+import {useProducts} from '../../hooks/useProducts';
+import {Pagination} from '../Pagination';
 
 export const ProductList: FC = () => {
-    const [data, setData] = useState<Product[]>([]);
+    const [page, setPage] = useState(1)
 
-    const fetchData = async () => {
-        try {
-            const svc = new ProductService();
-            const { data } = await svc.getProducts();
-            setData(data);
-        } catch (e) {
-            // TODO: handle error
-            console.log(e);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const perPage = 6;
+    const userList = useProducts(perPage, (page-1)*perPage);
+    const pageCount = userList.data?.count ? Math.ceil(userList.data.count / perPage) : 0;
 
     return (
         <>
-            {data.map(product => (
+            {userList.isLoading ? 'Loading...' : userList.data && userList.data.data.map(product => (
                 <div key={`prod.${product.id}`}>
                     {product.name}
                 </div>
             ))}
+            <Pagination page={page} pageCount={pageCount} setPage={setPage} />
         </>
     )
 }

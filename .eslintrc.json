@@ -1,5 +1,4 @@
 {
-  "extends": "next/core-web-vitals",
   "rules": {
     "quotes": [
       "error",
@@ -13,5 +12,17 @@
     ],
     "indent": "error",
     "no-unused-vars": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"]
+    }
+  ]
 }

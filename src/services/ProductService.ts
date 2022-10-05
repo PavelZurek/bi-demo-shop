@@ -3,8 +3,8 @@ import {Product} from '../models/Product';
 import {PaginatedResult} from '../models/PaginatedResult';
 
 export class ProductService {
-    getClient(): ApolloClient<any> {
-        return new ApolloClient<any>({
+    getClient(): ApolloClient<Record<string, unknown>> {
+        return new ApolloClient({
             uri: 'http://localhost:8080/v1/graphql',
             cache: new InMemoryCache(),
         });
@@ -37,10 +37,11 @@ export class ProductService {
         return data.product[0];
     }
 
-    async getProducts(limit: number = 6, offset: number = 0): Promise<PaginatedResult<Product>> {
+    async getProducts(limit = 6, offset = 0): Promise<PaginatedResult<Product>> {
         const { data } = await this.getClient().query({
-            query: gql`query ProductListQuery {
-              product (limit: ${limit}, offset: ${offset}) {
+            variables: { limit, offset },
+            query: gql`query ProductListQuery ($limit: Int!, $offset: Int!) {
+              product (limit: $limit, offset: $offset) {
                 id
                 name
                 category
@@ -61,7 +62,7 @@ export class ProductService {
 
         return {
             data: data.product,
-            count: data.count,
+            count: data.product_aggregate.aggregate.count,
         };
     }
 }

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box, Button, Heading, HStack, SimpleGrid, Stack, Text, useBreakpointValue} from '@chakra-ui/react';
+import {Box, Button, Heading, HStack, Stack, Text, useBreakpointValue} from '@chakra-ui/react';
 import Image from 'next/image';
 
 const Recommendation: FC<{ imageUrl: string }> = ({ imageUrl }) => {

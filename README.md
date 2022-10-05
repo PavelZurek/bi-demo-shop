@@ -5,11 +5,18 @@
 #### Prerequisites
 
  - Node.js >=16.13.0 <17
+ - Docker compose
 
-#### Install dependencies
+#### Install frontend dependencies
 ```bash
 npm install
 ```
+
+#### Run backend (database and graphQL engine)
+```bash
+docker-compose up
+```
+If you run BE for the first time, go to Hasura (http://localhost:8080/console/data/default/schema/public) and set tracking for all tables and foreign-key relationships.
 
 #### Run locally for development
 

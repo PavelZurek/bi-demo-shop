@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { useProducts } from '../../hooks/useProducts'
 import { Pagination } from '../Pagination'
 import { Product } from '../../models/Product'
@@ -15,6 +15,8 @@ import {
 import { formatCategoryName, formatCurrency } from '../../helpers/format'
 import Image from 'next/image'
 import { AddToCartButton } from './AddToCartButton'
+import { ProductListParamsFilter } from '../../services/ProductService'
+import { ProductListFilter } from './ProductListFilter'
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   const [isVisible, setVisible] = useState<boolean>(false)
@@ -65,6 +67,9 @@ export const ProductList: FC = () => {
   const [page, setPage] = useState(1)
   const [orderBy, setOrderBy] = useState<ProductListOrderBy>('price')
   const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('asc')
+  const [filter, setFilter] = useState<ProductListParamsFilter>({
+    category: [],
+  })
 
   const perPage = 6
   const userList = useProducts({
@@ -72,10 +77,15 @@ export const ProductList: FC = () => {
     offset: (page - 1) * perPage,
     orderBy,
     orderDirection,
+    filters: filter,
   })
   const pageCount = userList.data?.count
     ? Math.ceil(userList.data.count / perPage)
     : 0
+
+  const onFilterChange = useCallback((filter: ProductListParamsFilter) => {
+    setFilter(filter)
+  }, [])
 
   return (
     <Stack marginY="16px">
@@ -112,14 +122,7 @@ export const ProductList: FC = () => {
       </HStack>
       <Grid templateColumns="repeat(4, 25%)">
         <GridItem colSpan={1}>
-          <Stack>
-            <Box>
-              <Text variant="productListFilterHeading">Category</Text>
-            </Box>
-            <Box>
-              <Text variant="productListFilterHeading">Price range</Text>
-            </Box>
-          </Stack>
+          <ProductListFilter filter={filter} onChange={onFilterChange} />
         </GridItem>
         <GridItem colSpan={3}>
           <SimpleGrid gap="40px" columns={3}>

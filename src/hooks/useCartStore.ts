@@ -5,19 +5,38 @@ import { useEffect, useState } from 'react'
 
 interface CartState {
   products: Product[]
+  isOpen: boolean
   addProduct: (product: Product) => void
   clear: () => void
+  close: () => void
+  open: () => void
 }
 
 const emptyState = (set) => ({
   products: [],
+  isOpen: false,
   addProduct: (product: Product) =>
-    set((state) => ({
-      products: [...state.products, product],
-    })),
+    set((state) => {
+      if (state.products.find((p) => p.id === product.id)) {
+        return state
+      }
+
+      return {
+        products: [...state.products, product],
+        isOpen: true,
+      }
+    }),
   clear: () =>
     set(() => ({
       products: [],
+    })),
+  open: () =>
+    set(() => ({
+      isOpen: true,
+    })),
+  close: () =>
+    set(() => ({
+      isOpen: false,
     })),
 })
 

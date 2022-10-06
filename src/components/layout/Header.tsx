@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { HStack, Image, Link } from '@chakra-ui/react'
+import { Cart } from '../cart/Cart'
 
 export const Header: FC = () => {
   return (
@@ -17,11 +18,7 @@ export const Header: FC = () => {
           height={{ base: '20px', lg: '26px' }}
         />
       </Link>
-      <Image
-        src="/images/icons/shopping-cart.svg"
-        alt="Shopping cart"
-        height={{ base: '32px', lg: '54px' }}
-      />
+      <Cart />
     </HStack>
   )
 }

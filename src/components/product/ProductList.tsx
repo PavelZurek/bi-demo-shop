@@ -7,6 +7,7 @@ import {
   Grid,
   GridItem,
   HStack,
+  Select,
   SimpleGrid,
   Stack,
   Text,
@@ -58,11 +59,20 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   )
 }
 
+type ProductListOrderBy = 'price' | 'name'
+
 export const ProductList: FC = () => {
   const [page, setPage] = useState(1)
+  const [orderBy, setOrderBy] = useState<ProductListOrderBy>('price')
+  const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('asc')
 
   const perPage = 6
-  const userList = useProducts(perPage, (page - 1) * perPage)
+  const userList = useProducts({
+    limit: perPage,
+    offset: (page - 1) * perPage,
+    orderBy,
+    orderDirection,
+  })
   const pageCount = userList.data?.count
     ? Math.ceil(userList.data.count / perPage)
     : 0
@@ -83,8 +93,21 @@ export const ProductList: FC = () => {
             alt=""
             height="15px"
             width="15px"
+            onClick={() =>
+              setOrderDirection(orderDirection === 'asc' ? 'desc' : 'asc')
+            }
+            style={{ cursor: 'pointer' }}
           />
           <Text color="muted">Sort By</Text>
+          <Box>
+            <Select
+              value={orderBy}
+              onChange={(e) => setOrderBy(e.target.value as ProductListOrderBy)}
+            >
+              <option value="price">Price</option>
+              <option value="name">Name</option>
+            </Select>
+          </Box>
         </HStack>
       </HStack>
       <Grid templateColumns="repeat(4, 25%)">

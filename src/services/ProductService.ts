@@ -2,6 +2,13 @@ import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
 import { Product } from '../models/Product'
 import { PaginatedResult } from '../models/PaginatedResult'
 
+export interface ProductListParams {
+  limit?: number
+  offset?: number
+  orderBy: 'name' | 'price'
+  orderDirection?: 'asc' | 'desc'
+}
+
 export class ProductService {
   getClient(): ApolloClient<Record<string, unknown>> {
     return new ApolloClient({
@@ -39,12 +46,24 @@ export class ProductService {
     return data.product[0]
   }
 
-  async getProducts(limit = 6, offset = 0): Promise<PaginatedResult<Product>> {
+  async getProducts(
+    params: ProductListParams
+  ): Promise<PaginatedResult<Product>> {
     const { data } = await this.getClient().query({
-      variables: { limit, offset },
+      variables: {
+        limit: params.limit || 6,
+        offset: params.offset || 0,
+        order: {
+          [params.orderBy || 'price']: params.orderDirection || 'desc',
+        },
+      },
       query: gql`
-        query ProductListQuery($limit: Int!, $offset: Int!) {
-          product(limit: $limit, offset: $offset) {
+        query ProductListQuery(
+          $limit: Int!
+          $offset: Int!
+          $order: [product_order_by!]
+        ) {
+          product(limit: $limit, offset: $offset, order_by: $order) {
             id
             name
             category

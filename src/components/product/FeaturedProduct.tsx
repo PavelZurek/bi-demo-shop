@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import {
   Box,
-  Button,
   Heading,
   HStack,
   Stack,
@@ -15,6 +14,7 @@ import {
   formatDimensions,
   formatFileSize,
 } from '../../helpers/format'
+import { AddToCartButton } from './AddToCartButton'
 
 const Recommendation: FC<{ imageUrl: string }> = ({ imageUrl }) => {
   return (
@@ -24,10 +24,6 @@ const Recommendation: FC<{ imageUrl: string }> = ({ imageUrl }) => {
   )
 }
 
-const AddToCartButton: FC = () => {
-  return <Button variant="primary">Add to cart</Button>
-}
-
 export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
   const isPhone = useBreakpointValue({ base: true, lg: false })
 
@@ -35,7 +31,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
     <Stack paddingY="58px" spacing="28px" borderBottom="4px solid #E4E4E4">
       <HStack justifyContent="space-between">
         <Heading variant="featuredProductTitle">{product.name}</Heading>
-        {!isPhone && <AddToCartButton />}
+        {!isPhone && <AddToCartButton product={product} />}
       </HStack>
       <Box height="550px" overflow="hidden" position="relative">
         <Image
@@ -57,7 +53,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
           </Box>
         )}
       </Box>
-      {isPhone && <AddToCartButton />}
+      {isPhone && <AddToCartButton product={product} />}
       <Stack
         direction={{ base: 'column', lg: 'row' }}
         spacing="24px"

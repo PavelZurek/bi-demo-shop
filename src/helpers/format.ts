@@ -21,3 +21,12 @@ export const formatFileSize = (size: number, fractionDigits = 0): string => {
 export const formatCategoryName = (category: string): string => {
   return category.charAt(0).toUpperCase() + category.slice(1)
 }
+
+export const formatCurrency = (price: number, currency: string) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+  })
+
+  return formatter.format(price)
+}

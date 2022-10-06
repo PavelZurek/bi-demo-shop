@@ -18,7 +18,7 @@ export const Header: FC = () => {
         />
       </Link>
       <Image
-        src="/images/shopping-cart.svg"
+        src="/images/icons/shopping-cart.svg"
         alt="Shopping cart"
         height={{ base: '32px', lg: '54px' }}
       />

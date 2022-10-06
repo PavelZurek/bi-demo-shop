@@ -26,6 +26,33 @@ const theme = extendTheme({
           fontSize: '16px',
           lineHeight: '17.5px',
         },
+        productListHeading: {
+          fontWeight: 700,
+          fontSize: '30px',
+          lineHeight: '32.5px',
+        },
+        productListFilterHeading: {
+          fontWeight: 700,
+          fontSize: '22px',
+          lineHeight: '24px',
+        },
+        productListItemCategory: {
+          fontWeight: 700,
+          fontSize: '22px',
+          lineHeight: '24px',
+          color: 'muted',
+        },
+        productListItemName: {
+          fontWeight: 700,
+          fontSize: '34px',
+          lineHeight: '37px',
+        },
+        productListItemPrice: {
+          fontWeight: 400,
+          fontSize: '29px',
+          lineHeight: '31.5px',
+          color: 'muted',
+        },
       },
     },
     Button: {

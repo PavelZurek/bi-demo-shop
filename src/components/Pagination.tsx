@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Button } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 
 interface PaginationProps {
   page: number
@@ -40,5 +40,5 @@ export const Pagination: FC<PaginationProps> = ({
     )
   }
 
-  return <>{paginationButtons}</>
+  return <Box>{paginationButtons}</Box>
 }

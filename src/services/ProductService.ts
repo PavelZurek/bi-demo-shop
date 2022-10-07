@@ -54,7 +54,7 @@ export class ProductService {
       limit: params.limit || 6,
       offset: params.offset || 0,
       order: {
-        [params.orderBy || 'price']: params.orderDirection || 'desc',
+        [params.orderBy]: params.orderDirection,
       },
       where: {
         category: params.filters?.category?.length
@@ -102,7 +102,6 @@ export class ProductService {
       query,
       variables
     )
-    console.log(response)
 
     return {
       data: response.product,

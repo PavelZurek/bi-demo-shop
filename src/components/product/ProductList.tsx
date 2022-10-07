@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { useProducts } from '../../hooks/useProducts'
 import { Pagination } from '../Pagination'
 import { Product } from '../../models/Product'
@@ -82,6 +82,12 @@ export const ProductList: FC = () => {
   const pageCount = userList.data?.count
     ? Math.ceil(userList.data.count / perPage)
     : 0
+
+  useEffect(() => {
+    if (pageCount < page) {
+      setPage(pageCount)
+    }
+  }, [pageCount, page])
 
   const onFilterChange = useCallback((filter: ProductListParamsFilter) => {
     setFilter(filter)

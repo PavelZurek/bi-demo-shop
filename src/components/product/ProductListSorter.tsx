@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
-import { Box, Select, Text } from '@chakra-ui/react'
+import { Box, HStack, Select, Text } from '@chakra-ui/react'
 
 export type ProductListOrderBy = 'price' | 'name'
 export type OrderDirection = 'asc' | 'desc'
@@ -19,7 +19,7 @@ export const ProductListSorter: FC<ProductListSorter> = ({
   setOrderDirection,
 }) => {
   return (
-    <>
+    <HStack>
       <Image
         src="/images/icons/sort-by.svg"
         alt=""
@@ -41,6 +41,6 @@ export const ProductListSorter: FC<ProductListSorter> = ({
           <option value="name">Name</option>
         </Select>
       </Box>
-    </>
+    </HStack>
   )
 }

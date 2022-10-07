@@ -2,13 +2,17 @@ import { FC, useCallback, useEffect, useState } from 'react'
 import { useProducts } from '../../hooks/useProducts'
 import { Pagination } from '../Pagination'
 import {
+  Button,
   Grid,
   GridItem,
   HStack,
+  Modal,
+  ModalContent,
   SimpleGrid,
   Stack,
   Text,
   useBreakpointValue,
+  useDisclosure,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ProductListFilter } from './ProductListFilter'
@@ -19,6 +23,7 @@ import {
 } from './ProductListSorter'
 import { ProductListParamsFilter } from '../../api/getProducts'
 import { ProductListItem } from './ProductListItem'
+import { CloseIcon } from '@chakra-ui/icons'
 
 export const ProductList: FC = () => {
   const [page, setPage] = useState(1)
@@ -27,6 +32,12 @@ export const ProductList: FC = () => {
   const [filter, setFilter] = useState<ProductListParamsFilter>({
     category: [],
   })
+
+  const {
+    isOpen: isFilterModalOpen,
+    onOpen: onFilterModalOpen,
+    onClose: onFilterModalClose,
+  } = useDisclosure()
 
   const isPhone = useBreakpointValue({ base: true, lg: false })
 
@@ -71,13 +82,59 @@ export const ProductList: FC = () => {
               setOrderDirection={setOrderDirection}
             />
           ) : (
-            <Image
-              src="/images/icons/filter.svg"
-              alt=""
-              height="29px"
-              width="29px"
-              style={{ cursor: 'pointer' }}
-            />
+            <>
+              <Image
+                src="/images/icons/filter.svg"
+                alt=""
+                height="29px"
+                width="29px"
+                style={{ cursor: 'pointer' }}
+                onClick={onFilterModalOpen}
+              />
+              <Modal isOpen={isFilterModalOpen} onClose={onFilterModalClose}>
+                <ModalContent padding={8}>
+                  <Stack spacing={6}>
+                    <HStack justifyContent="space-between">
+                      <Text variant="productListFilterModalHeading">
+                        Filter
+                      </Text>
+                      <CloseIcon
+                        cursor="pointer"
+                        onClick={onFilterModalClose}
+                      />
+                    </HStack>
+                    <Stack>
+                      <ProductListFilter
+                        filter={filter}
+                        onChange={onFilterChange}
+                      />
+                      <ProductListSorter
+                        orderBy={orderBy}
+                        setOrderBy={setOrderBy}
+                        orderDirection={orderDirection}
+                        setOrderDirection={setOrderDirection}
+                      />
+                    </Stack>
+                    <SimpleGrid columns={2} spacing={1}>
+                      <Button
+                        variant="secondary"
+                        onClick={() => {
+                          setFilter({ category: [] })
+                          setOrderBy('price')
+                          setOrderDirection('asc')
+                          onFilterModalClose()
+                        }}
+                      >
+                        Clear
+                      </Button>
+                      <Button variant="primary" onClick={onFilterModalClose}>
+                        Save
+                      </Button>
+                    </SimpleGrid>
+                  </Stack>
+                </ModalContent>
+              </Modal>
+            </>
           )}
         </HStack>
       </HStack>

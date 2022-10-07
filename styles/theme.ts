@@ -36,6 +36,11 @@ const theme = extendTheme({
           fontSize: '22px',
           lineHeight: '24px',
         },
+        productListFilterModalHeading: {
+          fontWeight: 700,
+          fontSize: '34px',
+          lineHeight: '37px',
+        },
         productLisSorterLabel: {
           fontWeight: 400,
           fontSize: '22px',
@@ -94,7 +99,7 @@ const theme = extendTheme({
           color: 'black',
           border: '3px solid black',
           borderRadius: 0,
-          padding: '22px 45px',
+          padding: '19px 42px',
           textTransform: 'uppercase',
         },
         pagination: {

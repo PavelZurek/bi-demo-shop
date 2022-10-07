@@ -1,8 +1,8 @@
 import { NextPage } from 'next'
 import { FeaturedProduct } from '../src/components/product/FeaturedProduct'
-import { ProductService } from '../src/services/ProductService'
 import { Product } from '../src/models/Product'
 import { ProductList } from '../src/components/product/ProductList'
+import { getFeaturedProduct } from '../src/api/getFeaturedProduct'
 
 const IndexPage: NextPage<{ featuredProduct: Product }> = ({
   featuredProduct,
@@ -18,11 +18,9 @@ const IndexPage: NextPage<{ featuredProduct: Product }> = ({
 export default IndexPage
 
 export async function getServerSideProps() {
-  const svc = new ProductService()
-
   return {
     props: {
-      featuredProduct: await svc.getFeaturedProduct(),
+      featuredProduct: await getFeaturedProduct(),
     },
   }
 }

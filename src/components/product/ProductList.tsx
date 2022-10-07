@@ -15,7 +15,6 @@ import {
 import { formatCategoryName, formatCurrency } from '../../helpers/format'
 import Image from 'next/image'
 import { AddToCartButton } from './AddToCartButton'
-import { ProductListParamsFilter } from '../../services/ProductService'
 import { ProductListFilter } from './ProductListFilter'
 import {
   OrderDirection,
@@ -23,6 +22,7 @@ import {
   ProductListSorter,
 } from './ProductListSorter'
 import { pexelsImageLoader } from '../../helpers/loader'
+import { ProductListParamsFilter } from '../../api/getProducts'
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   const [isVisible, setVisible] = useState<boolean>(false)

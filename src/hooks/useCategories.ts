@@ -1,12 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { ProductService } from '../services/ProductService'
+import { getCategories } from '../api/getCategories'
 
 export const useCategories = () => {
   return useQuery(
     ['categoryList'],
     async () => {
-      const svc = new ProductService()
-      return await svc.getCategories()
+      return await getCategories()
     },
     { keepPreviousData: true }
   )

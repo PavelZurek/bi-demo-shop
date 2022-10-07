@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Box, Checkbox, Stack, Text } from '@chakra-ui/react'
 import { useCategories } from '../../hooks/useCategories'
 import { formatCategoryName } from '../../helpers/format'
-import { ProductListParamsFilter } from '../../services/ProductService'
+import { ProductListParamsFilter } from '../../api/getProducts'
 
 const ranges = [
   { label: 'Lower than $20', value: { max: 20 } },

@@ -29,6 +29,8 @@ const Recommendation: FC<{ imageUrl: string; imageAlt: string }> = ({
         alt={imageAlt}
         layout="fill"
         objectFit="cover"
+        width="120px"
+        height="150px"
       />
     </Box>
   )

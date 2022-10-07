@@ -19,7 +19,8 @@ export const Pagination: FC<PaginationProps> = ({
     if (page !== 1 && pageCount > 1) {
       paginationButtons.push(
         <Button
-          key={'set-page-first'}
+          key={'set-page-prev'}
+          aria-label="Previous page"
           variant="pagination"
           onClick={() => setPage(page - 1)}
           isActive={true}
@@ -28,22 +29,24 @@ export const Pagination: FC<PaginationProps> = ({
         </Button>
       )
     }
-    for (let i = 0; i < pageCount; i++) {
+    for (let i = 1; i <= pageCount; i++) {
       paginationButtons.push(
         <Button
-          key={`set-page-${i + 1}`}
+          key={`set-page-${i}`}
+          aria-label={`Page ${i}`}
           variant="pagination"
-          onClick={() => setPage(i + 1)}
-          isActive={page === i + 1}
+          onClick={() => setPage(i)}
+          isActive={page === i}
         >
-          {i + 1}
+          {i}
         </Button>
       )
     }
     if (page !== pageCount && pageCount > 1) {
       paginationButtons.push(
         <Button
-          key={'set-page-last'}
+          key={'set-page-next'}
+          aria-label="Next page"
           variant="pagination"
           onClick={() => setPage(page + 1)}
           isActive={true}

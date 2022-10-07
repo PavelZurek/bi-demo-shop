@@ -30,7 +30,15 @@ INSERT INTO "product" ("id", "name", "category", "price", "currency", "bestselle
 (9,	'Hut',	'landmarks',	123,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/237272/pexels-photo-237272.jpeg',	''),
 (10,	'Bicycle',	'hobby',	321,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg',	''),
 (11,	'Jump on beach',	'people',	55,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/2041832/pexels-photo-2041832.jpeg',	''),
-(12,	'Runner',	'people',	66,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/235922/pexels-photo-235922.jpeg',	'');
+(12,	'Runner',	'people',	66,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/235922/pexels-photo-235922.jpeg',	''),
+(13,	'Working online',	'people',	77,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg',	''),
+(14,	'Small lunch',	'food',	88,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/1034940/pexels-photo-1034940.jpeg',	''),
+(15,	'Guys on the wall',	'people',	99,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/1019771/pexels-photo-1019771.jpeg',	''),
+(16,	'Lady shopping',	'people',	101,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/972995/pexels-photo-972995.jpeg',	''),
+(17,	'Cruise',	'people',	111,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/1223649/pexels-photo-1223649.jpeg',	''),
+(18,	'Making breakfast',	'people',	122,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/1153369/pexels-photo-1153369.jpeg',	''),
+(19,	'Photo equipment',	'people',	133,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg',	''),
+(20,	'Learn to bike',	'people',	250,	'USD',	'0',	'0',	NULL,	'https://images.pexels.com/photos/1128318/pexels-photo-1128318.jpeg',	'');
 
 DROP TABLE IF EXISTS "recommendation";
 CREATE TABLE "public"."recommendation" (

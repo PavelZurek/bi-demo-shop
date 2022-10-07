@@ -11,12 +11,18 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { formatCategoryName, formatCurrency } from '../../helpers/format'
 import Image from 'next/image'
 import { AddToCartButton } from './AddToCartButton'
 import { ProductListParamsFilter } from '../../services/ProductService'
 import { ProductListFilter } from './ProductListFilter'
+import {
+  OrderDirection,
+  ProductListOrderBy,
+  ProductListSorter,
+} from './ProductListSorter'
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   const [isVisible, setVisible] = useState<boolean>(false)
@@ -61,26 +67,24 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   )
 }
 
-type ProductListOrderBy = 'price' | 'name'
-
 export const ProductList: FC = () => {
   const [page, setPage] = useState(1)
   const [orderBy, setOrderBy] = useState<ProductListOrderBy>('price')
-  const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('asc')
+  const [orderDirection, setOrderDirection] = useState<OrderDirection>('asc')
   const [filter, setFilter] = useState<ProductListParamsFilter>({
     category: [],
   })
 
   const perPage = 6
-  const userList = useProducts({
+  const productList = useProducts({
     limit: perPage,
     offset: (page - 1) * perPage,
     orderBy,
     orderDirection,
     filters: filter,
   })
-  const pageCount = userList.data?.count
-    ? Math.ceil(userList.data.count / perPage)
+  const pageCount = productList.data?.count
+    ? Math.ceil(productList.data.count / perPage)
     : 0
 
   useEffect(() => {
@@ -93,6 +97,8 @@ export const ProductList: FC = () => {
     setFilter(filter)
   }, [])
 
+  const isPhone = useBreakpointValue({ base: true, lg: false })
+
   return (
     <Stack marginY={4}>
       <HStack marginY={8} justifyContent="space-between">
@@ -104,38 +110,37 @@ export const ProductList: FC = () => {
           </Text>
         </HStack>
         <HStack>
-          <Image
-            src="/images/icons/sort-by.svg"
-            alt=""
-            height="15px"
-            width="15px"
-            onClick={() =>
-              setOrderDirection(orderDirection === 'asc' ? 'desc' : 'asc')
-            }
-            style={{ cursor: 'pointer' }}
-          />
-          <Text color="muted">Sort By</Text>
-          <Box>
-            <Select
-              value={orderBy}
-              onChange={(e) => setOrderBy(e.target.value as ProductListOrderBy)}
-            >
-              <option value="price">Price</option>
-              <option value="name">Name</option>
-            </Select>
-          </Box>
+          {!isPhone ? (
+            <ProductListSorter
+              orderBy={orderBy}
+              setOrderBy={setOrderBy}
+              orderDirection={orderDirection}
+              setOrderDirection={setOrderDirection}
+            />
+          ) : (
+            <Image
+              src="/images/icons/filter.svg"
+              alt=""
+              height="29px"
+              width="29px"
+              style={{ cursor: 'pointer' }}
+            />
+          )}
         </HStack>
       </HStack>
       <Grid templateColumns="repeat(4, 25%)">
-        <GridItem colSpan={1}>
-          <ProductListFilter filter={filter} onChange={onFilterChange} />
-        </GridItem>
-        <GridItem colSpan={3}>
-          <SimpleGrid gap={10} columns={3}>
-            {userList.isLoading
-              ? 'Loading...'
-              : userList.data &&
-                userList.data.data.map((product) => (
+        {!isPhone && (
+          <GridItem colSpan={1}>
+            <ProductListFilter filter={filter} onChange={onFilterChange} />
+          </GridItem>
+        )}
+        <GridItem colSpan={isPhone ? 4 : 3}>
+          <SimpleGrid gap={10} columns={{ base: 1, md: 2, lg: 3 }}>
+            {productList.isLoading && 'Loading...'}
+            {!productList.isLoading && !productList.data?.count
+              ? 'No products found.'
+              : !productList.isLoading &&
+                productList.data.data.map((product) => (
                   <ProductListItem
                     key={`prod.${product.id}`}
                     product={product}

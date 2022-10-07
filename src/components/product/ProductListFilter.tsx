@@ -37,34 +37,40 @@ export const ProductListFilter: FC<{
     <Stack>
       <Box>
         <Text variant="productListFilterHeading">Category</Text>
-        {!categories.isLoading &&
-          categories.data.map((category) => (
-            <Checkbox
-              key={`product-filter-category-${category}`}
-              isChecked={filter.category.includes(category)}
-              onChange={() => toggleCategory(category)}
-            >
-              {formatCategoryName(category)}
-            </Checkbox>
-          ))}
+        <Stack paddingY={6} spacing={5}>
+          {!categories.isLoading &&
+            categories.data.map((category) => (
+              <Checkbox
+                key={`product-filter-category-${category}`}
+                isChecked={filter.category.includes(category)}
+                onChange={() => toggleCategory(category)}
+                variant="productFilter"
+              >
+                {formatCategoryName(category)}
+              </Checkbox>
+            ))}
+        </Stack>
       </Box>
       <Box>
         <Text variant="productListFilterHeading">Price range</Text>
-        {ranges.map((range, i) => {
-          const isChecked =
-            filter.price?.min == range.value?.min &&
-            filter.price?.max == range.value?.max
+        <Stack paddingY={6} spacing={5}>
+          {ranges.map((range, i) => {
+            const isChecked =
+              filter.price?.min == range.value?.min &&
+              filter.price?.max == range.value?.max
 
-          return (
-            <Checkbox
-              key={`product-filter-range-${i}`}
-              isChecked={isChecked}
-              onChange={() => setRange(isChecked ? undefined : range.value)}
-            >
-              {range.label}
-            </Checkbox>
-          )
-        })}
+            return (
+              <Checkbox
+                key={`product-filter-range-${i}`}
+                isChecked={isChecked}
+                onChange={() => setRange(isChecked ? undefined : range.value)}
+                variant="productFilter"
+              >
+                {range.label}
+              </Checkbox>
+            )
+          })}
+        </Stack>
       </Box>
     </Stack>
   )

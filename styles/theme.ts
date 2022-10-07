@@ -28,13 +28,19 @@ const theme = extendTheme({
         },
         productListHeading: {
           fontWeight: 700,
-          fontSize: '30px',
-          lineHeight: '32.5px',
+          fontSize: { base: '18px', lg: '30px' },
+          lineHeight: { base: '19.58px', lg: '32.64px' },
         },
         productListFilterHeading: {
           fontWeight: 700,
           fontSize: '22px',
           lineHeight: '24px',
+        },
+        productLisSorterLabel: {
+          fontWeight: 400,
+          fontSize: '22px',
+          lineHeight: '23.94px',
+          color: 'muted',
         },
         productListItemCategory: {
           fontWeight: 700,
@@ -114,6 +120,47 @@ const theme = extendTheme({
         featuredProductSubtitle: {
           fontSize: '22px',
           lineHeight: '24px',
+        },
+      },
+    },
+    Checkbox: {
+      variants: {
+        productFilter: {
+          control: {
+            borderColor: 'black',
+            _checked: {
+              bg: 'white',
+              borderColor: 'black',
+              color: 'black',
+              _hover: {
+                bg: 'white',
+                borderColor: 'black',
+                color: 'black',
+              },
+            },
+          },
+          label: {
+            fontWeight: 400,
+            fontSize: '22px',
+            lineHeight: '23.94px',
+          },
+        },
+      },
+    },
+    Select: {
+      variants: {
+        productFilter: {
+          field: {
+            fontWeight: 400,
+            fontSize: '22px',
+            lineHeight: '23.94px',
+            bg: 'white',
+            appearance: 'none',
+            paddingBottom: '1px',
+            '> option, > optgroup': {
+              bg: 'white',
+            },
+          },
         },
       },
     },

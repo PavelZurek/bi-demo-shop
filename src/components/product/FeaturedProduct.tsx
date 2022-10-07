@@ -15,11 +15,18 @@ import {
   formatFileSize,
 } from '../../helpers/format'
 import { AddToCartButton } from './AddToCartButton'
+import { pexelsImageLoader } from '../../helpers/loader'
 
 const Recommendation: FC<{ imageUrl: string }> = ({ imageUrl }) => {
   return (
     <Box position="relative" width="120px" height="150px">
-      <Image src={imageUrl} alt="" layout="fill" objectFit="cover" />
+      <Image
+        loader={pexelsImageLoader}
+        src={imageUrl}
+        alt=""
+        layout="fill"
+        objectFit="cover"
+      />
     </Box>
   )
 }
@@ -35,6 +42,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
       </HStack>
       <Box height="550px" overflow="hidden" position="relative">
         <Image
+          loader={pexelsImageLoader}
           src={product.imageUrl}
           alt={product.imageAlt}
           layout="fill"

@@ -23,6 +23,7 @@ import {
   ProductListOrderBy,
   ProductListSorter,
 } from './ProductListSorter'
+import { pexelsImageLoader } from '../../helpers/loader'
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   const [isVisible, setVisible] = useState<boolean>(false)
@@ -37,6 +38,7 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
     >
       <Box position="relative" minHeight="390px">
         <Image
+          loader={pexelsImageLoader}
           src={product.imageUrl}
           alt={product.imageAlt}
           layout="fill"

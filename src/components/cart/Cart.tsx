@@ -18,6 +18,7 @@ import { Product } from '../../models/Product'
 import { formatCurrency } from '../../helpers/format'
 import Image from 'next/image'
 import { CloseIcon } from '@chakra-ui/icons'
+import { pexelsImageLoader } from '../../helpers/loader'
 
 const ProductCartItem: FC<{ product: Product }> = ({ product }) => {
   return (
@@ -30,6 +31,7 @@ const ProductCartItem: FC<{ product: Product }> = ({ product }) => {
       </VStack>
       <Box position="relative">
         <Image
+          loader={pexelsImageLoader}
           src={product.imageUrl}
           alt={product.imageAlt}
           layout="fill"

@@ -17,13 +17,16 @@ import {
 import { AddToCartButton } from './AddToCartButton'
 import { pexelsImageLoader } from '../../helpers/loader'
 
-const Recommendation: FC<{ imageUrl: string }> = ({ imageUrl }) => {
+const Recommendation: FC<{ imageUrl: string; imageAlt: string }> = ({
+  imageUrl,
+  imageAlt,
+}) => {
   return (
     <Box position="relative" width="120px" height="150px">
       <Image
         loader={pexelsImageLoader}
         src={imageUrl}
-        alt=""
+        alt={imageAlt}
         layout="fill"
         objectFit="cover"
       />
@@ -47,6 +50,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
           alt={product.imageAlt}
           layout="fill"
           objectFit="cover"
+          priority={true}
         />
         {product.featured && (
           <Box
@@ -92,6 +96,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
                 <Recommendation
                   key={`recommentarion-${product.id}-${rp.productByRecommendedProductId.id}`}
                   imageUrl={rp.productByRecommendedProductId.imageUrl}
+                  imageAlt={rp.productByRecommendedProductId.imageAlt}
                 />
               ))}
             </HStack>

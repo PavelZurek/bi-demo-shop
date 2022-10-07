@@ -7,7 +7,6 @@ import {
   Grid,
   GridItem,
   HStack,
-  Select,
   SimpleGrid,
   Stack,
   Text,

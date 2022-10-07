@@ -4,7 +4,6 @@ import {
   AvatarBadge,
   Box,
   Button,
-  Flex,
   HStack,
   Popover,
   PopoverContent,
@@ -54,8 +53,11 @@ export const Cart: FC = () => {
     <Box position="relative">
       <Avatar
         src="/images/icons/shopping-cart.svg"
+        name="Shopping cart"
         borderRadius={0}
         onClick={open}
+        ignoreFallback={true}
+        backgroundColor="transparent"
       >
         {products?.length > 0 && (
           <AvatarBadge boxSize="1.25em" bg="black" borderRadius={0} border={0}>

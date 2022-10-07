@@ -8,7 +8,7 @@ export const getCategories = async (): Promise<string[]> => {
       }
     }
   `
-  const response = await request('http://localhost:8080/v1/graphql', query)
+  const response = await request(process.env.NEXT_PUBLIC_GRAPHQL_URL, query)
 
   return response.product.map((p) => p.category)
 }

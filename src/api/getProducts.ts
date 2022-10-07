@@ -63,7 +63,7 @@ export const getProducts = async (
   `
 
   const response = await request(
-    'http://localhost:8080/v1/graphql',
+    process.env.NEXT_PUBLIC_GRAPHQL_URL,
     query,
     variables
   )

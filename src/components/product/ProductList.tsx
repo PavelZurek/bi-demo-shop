@@ -85,7 +85,7 @@ export const ProductList: FC = () => {
 
   useEffect(() => {
     if (pageCount < page) {
-      setPage(pageCount)
+      setPage(pageCount == 0 ? 1 : pageCount)
     }
   }, [pageCount, page])
 

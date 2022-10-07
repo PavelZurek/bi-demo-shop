@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Box, Button } from '@chakra-ui/react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 interface PaginationProps {
   page: number
@@ -17,8 +18,13 @@ export const Pagination: FC<PaginationProps> = ({
   if (pageCount > 1) {
     if (page !== 1 && pageCount > 1) {
       paginationButtons.push(
-        <Button key={'set-page-first'} onClick={() => setPage(page - 1)}>
-          &lt;
+        <Button
+          key={'set-page-first'}
+          variant="pagination"
+          onClick={() => setPage(page - 1)}
+          isActive={true}
+        >
+          <ChevronLeftIcon />
         </Button>
       )
     }
@@ -26,6 +32,7 @@ export const Pagination: FC<PaginationProps> = ({
       paginationButtons.push(
         <Button
           key={`set-page-${i + 1}`}
+          variant="pagination"
           onClick={() => setPage(i + 1)}
           isActive={page === i + 1}
         >
@@ -35,8 +42,13 @@ export const Pagination: FC<PaginationProps> = ({
     }
     if (page !== pageCount && pageCount > 1) {
       paginationButtons.push(
-        <Button key={'set-page-last'} onClick={() => setPage(page + 1)}>
-          &gt;
+        <Button
+          key={'set-page-last'}
+          variant="pagination"
+          onClick={() => setPage(page + 1)}
+          isActive={true}
+        >
+          <ChevronRightIcon />
         </Button>
       )
     }

@@ -28,7 +28,7 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
   const isPhone = useBreakpointValue({ base: true, lg: false })
 
   return (
-    <Stack paddingY="58px" spacing="28px" borderBottom="4px solid #E4E4E4">
+    <Stack paddingY={16} spacing={7} borderBottom="4px solid #E4E4E4">
       <HStack justifyContent="space-between">
         <Heading variant="featuredProductTitle">{product.name}</Heading>
         {!isPhone && <AddToCartButton product={product} />}
@@ -45,7 +45,8 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
             position="absolute"
             bottom={0}
             left={0}
-            padding="25px 56px"
+            paddingX={16}
+            paddingY={6}
             backgroundColor="white"
             color="black"
           >
@@ -56,12 +57,12 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
       {isPhone && <AddToCartButton product={product} />}
       <Stack
         direction={{ base: 'column', lg: 'row' }}
-        spacing="24px"
-        paddingTop="16px"
+        spacing={6}
+        paddingTop={4}
         justifyContent="space-between"
       >
         <Stack
-          spacing="16px"
+          spacing={4}
           textAlign="left"
           maxWidth={{ base: '100%', lg: '60%' }}
         >
@@ -75,13 +76,10 @@ export const FeaturedProduct: FC<{ product: Product }> = ({ product }) => {
             <Text color="muted">{product.details.description}</Text>
           )}
         </Stack>
-        <Stack spacing="24px" textAlign={{ base: 'left', lg: 'right' }}>
-          <Stack spacing="32px">
+        <Stack spacing={6} textAlign={{ base: 'left', lg: 'right' }}>
+          <Stack spacing={8}>
             <Heading variant="featuredProductSubtitle">People also buy</Heading>
-            <HStack
-              spacing="30px"
-              justifyContent={{ base: 'start', lg: 'end' }}
-            >
+            <HStack spacing={8} justifyContent={{ base: 'start', lg: 'end' }}>
               {product.recommendations.map((rp) => (
                 <Recommendation
                   key={`recommentarion-${product.id}-${rp.productByRecommendedProductId.id}`}

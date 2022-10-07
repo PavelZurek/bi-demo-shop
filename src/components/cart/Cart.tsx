@@ -4,11 +4,41 @@ import {
   AvatarBadge,
   Box,
   Button,
+  Flex,
+  HStack,
   Popover,
   PopoverContent,
+  SimpleGrid,
+  Stack,
   Text,
+  VStack,
 } from '@chakra-ui/react'
 import { useCartStore } from '../../hooks/useCartStore'
+import { Product } from '../../models/Product'
+import { formatCurrency } from '../../helpers/format'
+import Image from 'next/image'
+import { CloseIcon } from '@chakra-ui/icons'
+
+const ProductCartItem: FC<{ product: Product }> = ({ product }) => {
+  return (
+    <SimpleGrid columns={2} spacing={4}>
+      <VStack alignItems="left">
+        <Text variant="productCartItemName">{product.name}</Text>
+        <Text variant="productCartItemPrice">
+          {formatCurrency(product.price, product.currency)}
+        </Text>
+      </VStack>
+      <Box position="relative">
+        <Image
+          src={product.imageUrl}
+          alt={product.imageAlt}
+          layout="fill"
+          objectFit="cover"
+        />
+      </Box>
+    </SimpleGrid>
+  )
+}
 
 export const Cart: FC = () => {
   const isOpen = useCartStore((state) => state.isOpen)
@@ -38,13 +68,28 @@ export const Cart: FC = () => {
             border="4px solid #E4E4E4"
             borderRadius={0}
             position="absolute"
+            padding={6}
             top={2}
             right={0}
           >
-            {products?.map((p) => (
-              <Text key={`cart-item-product-${p.id}`}>{p.name}</Text>
-            ))}
-            <Button onClick={() => clear()}>Clear</Button>
+            <HStack marginBottom={4} justifyContent="end">
+              <CloseIcon cursor="pointer" onClick={close} />
+            </HStack>
+            <Stack paddingBottom={6} borderBottom="1px solid #C2C2C2">
+              {!products ||
+                (products.length < 1 && (
+                  <Text color="muted">Cart is empty</Text>
+                ))}
+              {products?.map((p) => (
+                <ProductCartItem
+                  key={`cart-item-product-${p.id}`}
+                  product={p}
+                />
+              ))}
+            </Stack>
+            <Button variant="secondary" marginTop={6} onClick={() => clear()}>
+              Clear
+            </Button>
           </PopoverContent>
         </Popover>
       </Box>

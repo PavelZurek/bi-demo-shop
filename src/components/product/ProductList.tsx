@@ -94,9 +94,9 @@ export const ProductList: FC = () => {
   }, [])
 
   return (
-    <Stack marginY="16px">
-      <HStack marginY="64px" justifyContent="space-between">
-        <HStack spacing="4px">
+    <Stack marginY={4}>
+      <HStack marginY={8} justifyContent="space-between">
+        <HStack spacing={1}>
           <Text variant="productListHeading">Photography</Text>
           <Text variant="productListHeading">/</Text>
           <Text variant="productListHeading" fontWeight="400" color="muted">
@@ -131,7 +131,7 @@ export const ProductList: FC = () => {
           <ProductListFilter filter={filter} onChange={onFilterChange} />
         </GridItem>
         <GridItem colSpan={3}>
-          <SimpleGrid gap="40px" columns={3}>
+          <SimpleGrid gap={10} columns={3}>
             {userList.isLoading
               ? 'Loading...'
               : userList.data &&
@@ -142,7 +142,7 @@ export const ProductList: FC = () => {
                   />
                 ))}
           </SimpleGrid>
-          <Stack alignItems="center">
+          <Stack alignItems="center" paddingY={10}>
             <Pagination page={page} pageCount={pageCount} setPage={setPage} />
           </Stack>
         </GridItem>

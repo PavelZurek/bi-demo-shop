@@ -26,12 +26,14 @@ import {
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   const [isVisible, setVisible] = useState<boolean>(false)
+  const isPhone = useBreakpointValue({ base: true, lg: false })
 
   return (
     <Stack
       key={`prod.${product.id}`}
       onMouseOver={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
+      spacing={{ base: 4, lg: 1 }}
     >
       <Box position="relative" minHeight="390px">
         <Image
@@ -50,7 +52,7 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
             <Text>Best seller</Text>
           </Box>
         )}
-        {isVisible && (
+        {(isVisible || isPhone) && (
           <Box position="absolute" width="100%" bottom={0}>
             <AddToCartButton product={product} width="100%" />
           </Box>
@@ -75,7 +77,9 @@ export const ProductList: FC = () => {
     category: [],
   })
 
-  const perPage = 6
+  const isPhone = useBreakpointValue({ base: true, lg: false })
+
+  const perPage = isPhone ? 4 : 6
   const productList = useProducts({
     limit: perPage,
     offset: (page - 1) * perPage,
@@ -96,8 +100,6 @@ export const ProductList: FC = () => {
   const onFilterChange = useCallback((filter: ProductListParamsFilter) => {
     setFilter(filter)
   }, [])
-
-  const isPhone = useBreakpointValue({ base: true, lg: false })
 
   return (
     <Stack marginY={4}>

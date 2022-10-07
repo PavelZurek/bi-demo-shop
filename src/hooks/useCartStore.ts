@@ -29,6 +29,7 @@ const emptyState = (set) => ({
   clear: () =>
     set(() => ({
       products: [],
+      isOpen: false,
     })),
   open: () =>
     set(() => ({

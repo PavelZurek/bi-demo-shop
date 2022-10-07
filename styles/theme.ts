@@ -161,6 +161,9 @@ const theme = extendTheme({
               bg: 'white',
             },
           },
+          icon: {
+            fontSize: '2xl',
+          },
         },
       },
     },
